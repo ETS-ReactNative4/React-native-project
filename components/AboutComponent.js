@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 import { Card, ListItem } from 'react-native-elements';
-import { PROMOTIONS } from '../shared/promotions.js';
+import { PROMOTIONS } from '../shared/promotions';
 
 
 function Mission() {
@@ -35,7 +35,7 @@ class About extends Component {
                 <ListItem
                     title={item.name}
                     subtitle={item.description}
-                    leftAvatar={{ source: require('./images/marek-brzoska-Fp89mUyzBfc-unsplash.jpg') }}
+                    leftAvatar={{ source: require('./images//kg-dishTAbyx9MVDLs-unsplash.jpg') }}
                 />
             );
         };
