@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { PLACES } from '../shared/places';
+//import { ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
+//redux
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
+
+const mapStateToProps = state => {
+    return {
+        places: state.places
+    };
+};
 
 class Directory extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            places: PLACES
-            
-        };
-    }
 
     static navigationOptions = {
         title: 'Directory'
@@ -20,28 +21,26 @@ class Directory extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        const renderDirectoryItem = ({ item }) => {
+        const renderDirectoryItem = ({item}) => {
             return (
-                <ListItem
+                <Tile
                     title={item.name}
-                    subtitle={item.description}
+                    caption={item.description}
+                    featured
                     onPress={() => navigate('PlaceInfo', { placeId: item.id })}
-                    leftAvatar={{ source: require('./images//issyk-kulV8PIvXjVqrk-unsplash.jpg')}}
+                    imageSrc={{uri: baseUrl + item.image}}
                 />
             );
-        }
-    
+        };
 
         return (
             <FlatList
-                data={this.state.places}
+                data={this.props.places.places}
                 renderItem={renderDirectoryItem}
                 keyExtractor={item => item.id.toString()}
             />
         );
     }
-
 }
 
-export default Directory;
-
+export default connect(mapStateToProps)(Directory);

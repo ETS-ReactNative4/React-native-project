@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList } from 'react-native';
+import { Text, ScrollView, FlatList } from 'react-native';
 import { Card, ListItem } from 'react-native-elements';
-import { PROMOTIONS } from '../shared/promotions';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+
+//added function mapStateToprops
+const mapStateToProps = state => {
+    return {
+        promotions: state.promotions
+    };
+};
+
 
 
 function Mission() {
@@ -17,12 +27,6 @@ function Mission() {
 
 class About extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            promotions: PROMOTIONS
-        };
-    }
 
     static navigationOptions = {
         title: 'About Us'
@@ -35,7 +39,7 @@ class About extends Component {
                 <ListItem
                     title={item.name}
                     subtitle={item.description}
-                    leftAvatar={{ source: require('./images//kg-dishTAbyx9MVDLs-unsplash.jpg') }}
+                    leftAvatar={{source: {uri: baseUrl + item.image}}}
                 />
             );
         };
@@ -46,7 +50,7 @@ class About extends Component {
                 <Card
                     title='About Us'>
                     <FlatList
-                        data={this.state.promotions}
+                        data={this.props.promotions.promotions}
                         renderItem={renderPromotion}
                         keyExtractor={item => item.id.toString()} />
                 </Card>
@@ -57,5 +61,5 @@ class About extends Component {
 
 
 
-export default About;
+export default connect(mapStateToProps)(About);
 

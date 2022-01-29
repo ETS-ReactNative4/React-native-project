@@ -1,6 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
-import { places } from './places';
+
 
 export const fetchComments = () => dispatch => {
     return fetch(baseUrl + 'comments')
@@ -52,7 +52,7 @@ export const fetchPlaces = () => dispatch => {
             })
         .then(response => response.json())
         .then(places => dispatch(addPlaces(places)))
-        .catch(error => dispatch(campsitesFailed(error.message)));
+        .catch(error => dispatch(placesFailed(error.message)));
 };
 
 export const placesLoading = () => ({

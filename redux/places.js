@@ -10,7 +10,7 @@ export const places = (state = {
             return { ...state, isLoading: false, errMess: null, places: action.payload };
 
         case ActionTypes.PLACES_LOADING:
-            return { ...state, isLoading: true, errMess: null, places: [] }
+            return { ...state, isLoading: true, errMess: null, places: []}
 
         case ActionTypes.PLACES_FAILED:
             return { ...state, isLoading: false, errMess: action.payload };
